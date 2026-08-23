@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ledger DMV — Eligibility Slip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7EE; --desk:#2B2730; --ink:#221D18; --ink-soft:#79705F;
+    --line:#CDC5B2; --green:#3F6C4B; --red:#B23A2E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse at 50% -10%, #3a3440 0%, var(--desk) 60%);
+    font-family:'Courier Prime', monospace; padding:60px 16px;
+  }
+  .receipt{
+    position:relative; width:min(420px,92vw); background:var(--paper);
+    padding:38px 30px 34px; color:var(--ink);
+    box-shadow:0 30px 60px rgba(0,0,0,.45), 0 2px 0 rgba(255,255,255,.5) inset;
+  }
+  .receipt::after{
+    content:""; position:absolute; left:0; right:0; bottom:-13px; height:13px;
+    background: linear-gradient(-45deg, var(--paper) 8px, transparent 0),
+                linear-gradient(45deg, var(--paper) 8px, transparent 0);
+    background-size:16px 16px; background-repeat:repeat-x;
+  }
+  .kiosk{ text-align:center; font-family:'Space Mono',monospace; font-weight:700;
+    letter-spacing:.35em; font-size:12px; color:var(--ink-soft); text-transform:uppercase;}
+  .title{ text-align:center; font-family:'Space Mono',monospace; font-weight:700;
+    font-size:19px; letter-spacing:.1em; margin:8px 0 2px; text-transform:uppercase;}
+  .sub{ text-align:center; font-size:11px; color:var(--ink-soft); margin-bottom:10px;}
+  .dash{ border:none; border-top:2px dashed var(--line); margin:16px 0;}
+  .row{ display:flex; justify-content:space-between; font-size:14.5px; padding:5px 0;}
+  .row .label{ color:var(--ink-soft);}
+  .row .value{ font-weight:700; text-align:right;}
+  .row.warn .value{ color:var(--red); }
+  .stampwrap{ display:flex; justify-content:center; margin:22px 0 6px;}
+  .stamp{ border:3px solid var(--c); color:var(--c); font-family:'Space Mono',monospace;
+    font-weight:700; letter-spacing:.15em; padding:9px 18px; border-radius:6px;
+    transform:rotate(-8deg); opacity:.88; font-size:14px; text-transform:uppercase;}
+  .barcode{ height:34px; margin-top:16px;
+    background-image:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 7px, transparent 7px 13px);}
+  .foot{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:12px; letter-spacing:.05em;}
+</style>
+</head>
+<body>
+<script>
+  // Gather applicant details
+  let name = prompt("Enter your name:");
+  let age = parseInt(prompt("Enter your age:"));
+
+  let eligible = age >= 18;
+  let stampColor = eligible ? "#3F6C4B" : "#B23A2E";
+  let slipNo = Math.floor(100000 + Math.random() * 900000);
+  let today = new Date().toLocaleDateString();
+
+  let reasonRow = eligible ? "" :
+    `<div class="row warn"><span class="label">Reason</span><span class="value">Minimum age is 18</span></div>`;
+
+  document.write(`
+    <div class="receipt" style="--c:${stampColor}">
+      <div class="kiosk">Ledger &amp; Co.</div>
+      <div class="title">Eligibility Slip</div>
+      <div class="sub">Ledger DMV &middot; Slip #${slipNo} &middot; ${today}</div>
+      <hr class="dash">
+      <div class="row"><span class="label">Name</span><span class="value">${name}</span></div>
+      <div class="row"><span class="label">Age</span><span class="value">${age}</span></div>
+      ${reasonRow}
+      <div class="stampwrap"><div class="stamp">${eligible ? "Eligible" : "Not Eligible"}</div></div>
+      <div class="barcode"></div>
+      <div class="foot">DRIVING LICENSE APPLICATION DESK</div>
+    </div>
+  `);
+</script>
+</body>
+</html>
