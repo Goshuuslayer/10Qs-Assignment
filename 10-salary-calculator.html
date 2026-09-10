@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Salary Slip</title>
+<style>
+  body{ margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:#2B2730; font-family:'Courier New', monospace; padding:20px;}
+  .box{ background:#FBF7EE; width:min(380px,92vw); padding:24px; border-radius:8px;
+    box-shadow:0 15px 30px rgba(0,0,0,.35); color:#221D18; font-size:15px; line-height:1.7;}
+  .box hr{ border:none; border-top:1px dashed #999; margin:10px 0;}
+  .box b{ display:inline-block; width:140px;}
+</style>
+</head>
+<body>
+<script>
+  // Ask employee details
+  let employeeName = prompt("Enter employee name:");
+  let basicSalary = parseFloat(prompt("Enter basic salary:"));
+
+  // Calculate bonus based on salary
+  let bonusPercent;
+  if (basicSalary >= 5000) {
+    bonusPercent = 0.20;
+  } else if (basicSalary >= 3000) {
+    bonusPercent = 0.10;
+  } else {
+    bonusPercent = 0.05;
+  }
+
+  let bonus = basicSalary * bonusPercent;
+  let finalSalary = basicSalary + bonus;
+
+  document.write(`
+    <div class="box">
+      <center><b>===== SALARY SLIP =====</b></center>
+      <hr>
+      <b>Employee:</b> ${employeeName}<br>
+      <b>Basic Salary:</b> $${basicSalary}<br>
+      <b>Bonus:</b> $${bonus}<br>
+      <b>Final Salary:</b> $${finalSalary}<br>
+      <hr>
+    </div>
+  `);
+</script>
+</body>
+</html>

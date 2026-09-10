@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Login</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #2b2730;
+        font-family: "Courier New", monospace;
+        padding: 20px;
+      }
+      .box {
+        background: #fbf7ee;
+        width: min(380px, 92vw);
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        color: #221d18;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      .ok {
+        color: #3f6c4b;
+        font-weight: bold;
+      }
+      .fail {
+        color: #b23a2e;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Stored correct credentials
+      let correctUsername = prompt("Enter username in database:");
+      let correctPassword = prompt("Enter password in database:");
+
+      // Ask employee to log in
+      let enteredUsername = prompt("Enter username to login:");
+      let enteredPassword = prompt("Enter password to logon:");
+
+      document.write(`<div class="box">`);
+      if (
+        enteredUsername === correctUsername &&
+        enteredPassword === correctPassword
+      ) {
+        document.write(`
+      <center><b>Welcome to Employee Dashboard</b></center><br>
+      Login Status: <span class="ok">Successful</span>
+    `);
+      } else {
+        document.write(`
+      <center><b class="fail">Login Failed</b></center><br>
+      Invalid Username or Password
+    `);
+      }
+      document.write(`</div>`);
+    </script>
+  </body>
+</html>
